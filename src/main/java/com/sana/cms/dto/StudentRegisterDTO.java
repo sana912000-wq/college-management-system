@@ -1,20 +1,31 @@
 package com.sana.cms.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
 
 public class StudentRegisterDTO {
-    private String rollNumber;
-    private String name;
-    private String email;
-    private String phone;
-    private String password;
-    private String branch;
-    private Integer semester;
-    private Integer enrollmentYear;
-    private String dob;
-    private String address;
-    private String city;
-    private String pincode;
+        @NotBlank(message = "Name is Required")
+        private String name;
+
+        @Email(message = "Invalid Email Format")
+        @NotBlank(message = "Email is Required")
+        private String email;
+
+        @NotBlank(message = "Phone is Required")
+        private String phone;
+
+        @NotBlank(message = "Password is Required")
+        @Pattern(
+                regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Z a-z 0-9]).{8,}$",
+                message = "Password must have at least 8 characters,1 uppercase,1 number and 1 special character"
+        )
+        private String password;
+
+        private String branch;
+
+        private Integer enrollmentYear;
 }

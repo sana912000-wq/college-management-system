@@ -1,0 +1,140 @@
+{
+  "info": {
+    "_postman_id": "20a8a36b-ec13-4aa4-8a8a-63e63bf5453b",
+    "name": "College Management System",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53509277",
+    "_collection_link": "https://go.postman.co/collection/53509277-20a8a36b-ec13-4aa4-8a8a-63e63bf5453b?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Student Register",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"sana\",\r\n    \"email\": \"sana10@gmail.com\",\r\n    \"phone\": \"7981455400\",\r\n    \"password\": \"Zananas@\",\r\n    \"branch\": \"ECE\",\r\n    \"enrollmentYear\": 2019\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/student/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "student",
+            "register"
+          ]
+        },
+        "description": "STUDENT REGISTER"
+      },
+      "response": []
+    },
+    {
+      "name": "Faculty Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"sana\",\r\n    \"email\": \"sana1@gmail.com\",\r\n    \"phone\": \"7981455400\",\r\n    \"password\": \"Zananas@\",\r\n    \"department\":\"ECE\",\r\n    \"designation\":\"professor\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/faculty/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "faculty",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faculty Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"test@gmail.com' __\",\r\n    \"password\": \"Zananas@!\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/faculty/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "faculty",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Student Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"sana1@gmail.com\",\r\n    \"password\": \"Zanans@\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/student/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "student",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

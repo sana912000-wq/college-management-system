@@ -1,7 +1,10 @@
 package com.sana.cms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,6 +25,7 @@ public class FacultyPersonal {
 
     private String phone;
 
+    @JsonIgnore
     @Column(name = "password_hash")
     private String passwordHash;
 
@@ -34,7 +38,8 @@ public class FacultyPersonal {
     @Column(name = "expierence_years")
     private int expierenceYears;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at",updatable = false)
+    @CreationTimestamp
     private LocalDateTime createdAt;
 }
 
