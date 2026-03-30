@@ -6,6 +6,8 @@ import com.sana.cms.service.FacultyService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,5 +25,16 @@ public class FacultyController {
     @PostMapping("/login")
     public ResponseEntity<?> loginFaculty(@Valid @RequestBody LoginDTO dto) {
         return ResponseEntity.ok(facultyService.login(dto));
+    }
+    @GetMapping("/test")
+    public String test() {
+        return "Faculty API IS secured";
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("hasRole('FACULTY')")
+    public ResponseEntity<?> getProfile(Authentication authentication) {
+        String email = authentication.getName();
+        return ResponseEntity.ok(facultyService.getFacultyProfile(email));
     }
 }

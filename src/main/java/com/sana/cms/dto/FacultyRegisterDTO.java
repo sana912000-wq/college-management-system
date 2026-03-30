@@ -19,10 +19,6 @@ public class FacultyRegisterDTO {
     private String phone;
 
     @NotBlank(message = "Password is Required")
-    @Pattern(
-            regexp = "^(?=.*[A-Z])(?=.*\\d)(?=.*[^A-Z a-z 0-9]).{8,}$",
-            message = "Password must have at least 8 characters,1 uppercase,1 number and 1 special character"
-    )
     private String password;
 
     private String designation;

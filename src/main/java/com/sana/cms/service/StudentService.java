@@ -4,12 +4,13 @@ import com.sana.cms.dto.LoginDTO;
 import com.sana.cms.dto.StudentRegisterDTO;
 import com.sana.cms.entity.Student;
 import com.sana.cms.repository.StudentRepository;
+import com.sana.cms.util.JwtUtil;
+import com.sana.cms.util.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +23,10 @@ public class StudentService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    public Map<String,Object> register(StudentRegisterDTO dto) {
+
+    public Map<String, Object> register(StudentRegisterDTO dto) {
+
+       PasswordValidator. validate(dto.getPassword());
 
         if (studentRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new ResponseStatusException(
@@ -52,31 +56,62 @@ public class StudentService {
 
             return response;
 
+        } catch (ResponseStatusException e) {
+            throw e;
         } catch (Exception e) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "Error while registering student"
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Something went wrong during registration"
             );
         }
     }
 
-        public Map<String,Object> login (LoginDTO dto){
-            Student student = studentRepository.findByEmail(dto.getEmail())
-                    .orElse(null);
+    public Map<String, Object> login(LoginDTO dto) {
 
-            if (student == null || !encoder.matches(dto.getPassword(), student.getPasswordHash())) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
-            }
+        Student student = studentRepository.findByEmail(dto.getEmail())
+                .orElse(null);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("token", "dummy-token");
-            response.put("type", "Bearer");
-            response.put("userId", student.getId());
-            response.put("email", student.getEmail());
-            response.put("name", student.getName());
-            response.put("role", "STUDENT");
-
-            return response;
+        if (student == null || !encoder.matches(dto.getPassword(), student.getPasswordHash())) {
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Invalid email or password"
+            );
         }
 
+        String token = JwtUtil.generateToken(
+                student.getEmail(),
+                "STUDENT",
+                student.getId()
+        );
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("type", "Bearer");
+        response.put("userId", student.getId());
+        response.put("email", student.getEmail());
+        response.put("name", student.getName());
+        response.put("role", "STUDENT");
+
+        return response;
     }
+
+    public Map<String, Object> getStudentProfile(String email) {
+
+        Student student = studentRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Student not found"
+                ));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", student.getId());
+        response.put("name", student.getName());
+        response.put("email", student.getEmail());
+        response.put("branch", student.getBranch());
+        response.put("enrollmentYear", student.getEnrollmentYear());
+        response.put("role", "STUDENT");
+
+        return response;
+    }
+
+}

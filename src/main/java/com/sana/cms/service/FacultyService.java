@@ -4,12 +4,13 @@ import com.sana.cms.dto.FacultyRegisterDTO;
 import com.sana.cms.dto.LoginDTO;
 import com.sana.cms.entity.FacultyPersonal;
 import com.sana.cms.repository.FacultyPersonalRepository;
+import com.sana.cms.util.JwtUtil;
+import com.sana.cms.util.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,8 @@ public class FacultyService {
     private BCryptPasswordEncoder encoder;
 
     public Map<String,Object> register(FacultyRegisterDTO dto) {
+
+        PasswordValidator. validate(dto.getPassword());
 
         if (facultyPersonalRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already registered");
@@ -64,12 +67,37 @@ public class FacultyService {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
         }
 
+        String token = JwtUtil.generateToken(
+                faculty.getEmail(),
+                "FACULTY",
+                faculty.getId()
+        );
+
         Map<String, Object> response = new HashMap<>();
-        response.put("token", "dummy-token");
+        response.put("token", token);
         response.put("type", "Bearer");
         response.put("userId", faculty.getId());
         response.put("email", faculty.getEmail());
         response.put("name", faculty.getName());
+        response.put("role", "FACULTY");
+
+        return response;
+    }
+
+    public Map<String, Object> getFacultyProfile(String email) {
+
+        FacultyPersonal faculty = facultyPersonalRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Faculty not found"
+                ));
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", faculty.getId());
+        response.put("name", faculty.getName());
+        response.put("email", faculty.getEmail());
+        response.put("department", faculty.getDepartment());
+        response.put("designation", faculty.getDesignation());
         response.put("role", "FACULTY");
 
         return response;

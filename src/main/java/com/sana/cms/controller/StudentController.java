@@ -1,13 +1,13 @@
 package com.sana.cms.controller;
 
-import com.sana.cms.dto.FacultyRegisterDTO;
 import com.sana.cms.dto.LoginDTO;
 import com.sana.cms.dto.StudentRegisterDTO;
-import com.sana.cms.entity.Student;
 import com.sana.cms.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,5 +25,17 @@ public class StudentController {
     @PostMapping("/login")
     public ResponseEntity<?> loginStudent(@Valid @RequestBody LoginDTO dto) {
         return ResponseEntity.ok(studentService.login(dto));
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "Student API IS secured";
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<?> getProfile(Authentication authentication) {
+        String email = authentication.getName();
+        return ResponseEntity.ok(studentService.getStudentProfile(email));
     }
 }

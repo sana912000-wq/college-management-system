@@ -135,6 +135,154 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Admin Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/admin/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "admin",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/auth/admin/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "admin",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Student Profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaXlhMjAwMEBnbWFpbC5jb20iLCJyb2xlIjoiU1RVREVOVCIsInVzZXJJZCI6MzYsImlhdCI6MTc3NDgwNDk0MywiZXhwIjoxNzc0ODQwOTQzfQ.8J-gPhsGOfl4zhb6wZulRQ_rBQ9f_mKg-sCN_Bady-",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/student/profile",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "student",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Faculty Profile",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "http://localhost:8080/api/auth/faculty/login",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/faculty/profile",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "faculty",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/auth/admin/profile",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "auth",
+            "admin",
+            "profile"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
