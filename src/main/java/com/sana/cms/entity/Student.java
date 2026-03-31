@@ -39,6 +39,9 @@ public class Student {
 
     private Integer semester;
 
+    @Column(unique = true)
+    private String rollNo;
+
     @Column(name = "enrollment_year")
     private Integer enrollmentYear;
 

@@ -24,4 +24,6 @@ public class StudentRegisterDTO {
         private String branch;
 
         private Integer enrollmentYear;
+
+        private String rollNo;
 }

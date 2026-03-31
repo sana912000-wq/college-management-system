@@ -9,6 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth/admin")
 public class AdminController {
@@ -36,5 +38,15 @@ public class AdminController {
     public ResponseEntity<?> getProfile(Authentication authentication) {
         String email = authentication.getName();
         return ResponseEntity.ok(adminService.getAdminProfile(email));
+    }
+    @PutMapping("/profile")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> updateProfile(
+            @RequestBody Map<String, String> request,
+            Authentication authentication) {
+        String email = authentication.getName();
+        return ResponseEntity.ok(
+                adminService.updateAdminProfile(email, request)
+        );
     }
 }

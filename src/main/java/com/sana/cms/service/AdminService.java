@@ -107,4 +107,25 @@ public class AdminService {
 
         return response;
     }
+    public Map<String, String> updateAdminProfile(String email, Map<String, String> request) {
+
+        Admin admin = adminRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Admin not found"));
+
+        if (request.containsKey("name")) {
+            admin.setName(request.get("name"));
+        }
+
+        if (request.containsKey("phone")) {
+            admin.setPhone(request.get("phone"));
+        }
+
+        adminRepository.save(admin);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Admin profile updated successfully");
+
+        return response;
+    }
 }

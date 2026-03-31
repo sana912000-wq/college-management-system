@@ -39,7 +39,10 @@ public class SecurityConfig {
                                 "/api/auth/student/login",
                                 "/api/auth/faculty/register",
                                 "/api/auth/faculty/login",
-                                "/api/auth/admin/login"
+                                "/api/auth/admin/login",
+                                "/api/auth/forgot-password",
+                                "/api/auth/reset-password",
+                                "api/auth/change-password"
                         ).permitAll()
 
                         .requestMatchers("/api/auth/admin/**").hasRole("ADMIN")

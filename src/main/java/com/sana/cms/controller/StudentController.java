@@ -10,6 +10,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/auth/student")
 public class StudentController {
@@ -37,5 +39,16 @@ public class StudentController {
     public ResponseEntity<?> getProfile(Authentication authentication) {
         String email = authentication.getName();
         return ResponseEntity.ok(studentService.getStudentProfile(email));
+    }
+
+    @PutMapping("/profile")
+    @PreAuthorize("hasRole('STUDENT')")
+    public ResponseEntity<?> updateProfile(
+            @RequestBody Map<String, String> request,
+            Authentication authentication) {
+        String email = authentication.getName();
+        return ResponseEntity.ok(
+                studentService.updateStudentProfile(email, request)
+        );
     }
 }

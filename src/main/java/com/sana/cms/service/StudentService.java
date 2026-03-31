@@ -44,6 +44,7 @@ public class StudentService {
             student.setPasswordHash(encoder.encode(dto.getPassword()));
             student.setBranch(dto.getBranch());
             student.setEnrollmentYear(dto.getEnrollmentYear());
+            student.setRollNo(dto.getRollNo());
 
             studentRepository.save(student);
 
@@ -104,12 +105,35 @@ public class StudentService {
                 ));
 
         Map<String, Object> response = new HashMap<>();
-        response.put("id", student.getId());
+
         response.put("name", student.getName());
         response.put("email", student.getEmail());
+        response.put("rollNo", student.getRollNo());
         response.put("branch", student.getBranch());
-        response.put("enrollmentYear", student.getEnrollmentYear());
+        response.put("semester", student.getEnrollmentYear());
         response.put("role", "STUDENT");
+
+        return response;
+    }
+
+    public Map<String, String> updateStudentProfile(String email, Map<String, String> request) {
+
+        Student student = studentRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Student not found"));
+
+        if (request.containsKey("phone")) {
+            student.setPhone(request.get("phone"));
+        }
+
+        if (request.containsKey("address")) {
+            student.setAddress(request.get("address"));
+        }
+
+        studentRepository.save(student);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Profile updated successfully");
 
         return response;
     }

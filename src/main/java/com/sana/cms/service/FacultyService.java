@@ -93,12 +93,51 @@ public class FacultyService {
                 ));
 
         Map<String, Object> response = new HashMap<>();
-        response.put("id", faculty.getId());
         response.put("name", faculty.getName());
+        response.put("phone", faculty.getPhone());
         response.put("email", faculty.getEmail());
         response.put("department", faculty.getDepartment());
         response.put("designation", faculty.getDesignation());
+        response.put("qualification", faculty.getQualification());
+        response.put("expierenceYears", faculty.getExpierenceYears());
         response.put("role", "FACULTY");
+
+        return response;
+    }
+    public Map<String, String> updateFacultyProfile(String email, Map<String, String> request) {
+
+        FacultyPersonal faculty = facultyPersonalRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Faculty not found"));
+
+        if (request.containsKey("name")) {
+            faculty.setName(request.get("name"));
+        }
+
+        if (request.containsKey("phone")) {
+            faculty.setPhone(request.get("phone"));
+        }
+
+        if (request.containsKey("department")) {
+            faculty.setDepartment(request.get("department"));
+        }
+
+        if (request.containsKey("designation")) {
+            faculty.setDesignation(request.get("designation"));
+        }
+
+        if (request.containsKey("qualification")) {
+            faculty.setQualification(request.get("qualification"));
+        }
+
+        if (request.containsKey("expierenceYears")) {
+            faculty.setExpierenceYears(Integer.parseInt(request.get("expierenceYears")));
+        }
+
+        facultyPersonalRepository.save(faculty);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Faculty profile updated successfully");
 
         return response;
     }
