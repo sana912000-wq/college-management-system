@@ -15,16 +15,47 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidation(MethodArgumentNotValidException ex) {
+
         Map<String, String> errors = new HashMap<>();
-        FieldError error = ex.getBindingResult().getFieldErrors().get(0);
-        errors.put(error.getField(), error.getDefaultMessage());
+
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+            errors.put(error.getField(), error.getDefaultMessage());
+        }
+
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<Map<String, String>> handleResponseStatus(ResponseStatusException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getReason());
+    public ResponseEntity<Map<String, Object>> handleResponseStatus(ResponseStatusException ex) {
+
+        Map<String, Object> error = new HashMap<>();
+
+        error.put("status", ex.getStatusCode().value());
+        error.put("error", ex.getStatusCode().toString());
+        error.put("message", ex.getReason());
+
         return new ResponseEntity<>(error, ex.getStatusCode());
+    }
+
+    @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
+    public ResponseEntity<Map<String, Object>> handleAccessDenied(Exception ex) {
+
+        Map<String, Object> error = new HashMap<>();
+        error.put("status", 403);
+        error.put("error", "FORBIDDEN");
+        error.put("message", "Access denied");
+
+        return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, Object>> handleGeneric(Exception ex) {
+
+        Map<String, Object> error = new HashMap<>();
+        error.put("status", 500);
+        error.put("error", "INTERNAL_SERVER_ERROR");
+        error.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
