@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Set;
 
@@ -24,10 +23,8 @@ public class EnrollmentService {
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
 
-    // ✅ Allowed status values
     private static final Set<String> VALID_STATUS = Set.of("ACTIVE", "DROPPED", "COMPLETED");
 
-    // ✅ ENROLL STUDENT
     public EnrollmentResponseDTO enrollStudent(EnrollmentRequestDTO dto) {
 
         Student student = studentRepository.findById(dto.getStudentId())
@@ -36,7 +33,6 @@ public class EnrollmentService {
         Course course = courseRepository.findById(dto.getCourseId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        // 🔥 Duplicate check
         if (enrollmentRepository.existsByStudentIdAndCourseId(dto.getStudentId(), dto.getCourseId())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Student already enrolled");
         }
@@ -52,7 +48,6 @@ public class EnrollmentService {
         return mapToResponse(enrollmentRepository.save(enrollment));
     }
 
-    // ✅ GET ALL
     public List<EnrollmentResponseDTO> getAllEnrollments() {
         return enrollmentRepository.findAll()
                 .stream()
@@ -67,7 +62,6 @@ public class EnrollmentService {
         return mapToResponse(e);
     }
 
-    // ✅ GET BY STUDENT
     public List<EnrollmentResponseDTO> getByStudent(Long studentId) {
 
         if (!studentRepository.existsById(studentId)) {
@@ -80,7 +74,6 @@ public class EnrollmentService {
                 .toList();
     }
 
-    // ✅ GET BY COURSE
     public List<EnrollmentResponseDTO> getByCourse(Long courseId) {
 
         if (!courseRepository.existsById(courseId)) {
@@ -93,13 +86,11 @@ public class EnrollmentService {
                 .toList();
     }
 
-    // ✅ UPDATE STATUS (IMPROVED 🔥)
     public EnrollmentResponseDTO updateStatus(Long id, String status) {
 
         Enrollment enrollment = enrollmentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Enrollment not found"));
 
-        // 🔥 Validation
         if (!VALID_STATUS.contains(status.toUpperCase())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Invalid status. Allowed: ACTIVE, DROPPED, COMPLETED");
@@ -110,13 +101,11 @@ public class EnrollmentService {
         return mapToResponse(enrollmentRepository.save(enrollment));
     }
 
-    // ✅ DELETE (SAFE VERSION 🔥)
     public void deleteEnrollment(Long id) {
 
         Enrollment enrollment = enrollmentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Enrollment not found"));
 
-        // 🔥 Best practice: don't delete ACTIVE enrollments
         if ("ACTIVE".equals(enrollment.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Cannot delete ACTIVE enrollment. Drop it first.");
@@ -125,7 +114,6 @@ public class EnrollmentService {
         enrollmentRepository.delete(enrollment);
     }
 
-    // ✅ MAPPER
     private EnrollmentResponseDTO mapToResponse(Enrollment e) {
         return new EnrollmentResponseDTO(
                 e.getId(),

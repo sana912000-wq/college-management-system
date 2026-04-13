@@ -7,7 +7,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class AttendanceResponseDTO {
-
     private Long id;
     private String studentName;
     private String courseName;

@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnrollmentResponseDTO {
-
     private Long id;
-
     private String studentName;
     private String subjectName;
     private String courseDetails;

@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 
 @Service
@@ -17,13 +16,13 @@ public class SubjectService {
 
     private final SubjectRepository subjectRepository;
 
-    // 🔥 CREATE SUBJECT
     public SubjectResponseDTO createSubject(SubjectRequestDTO dto) {
 
-        // Optional: check duplicate subject_code
         if (subjectRepository.existsBySubjectCode(dto.getSubjectCode())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Subject code already exists");
         }
+
+        validateMarks(dto);
 
         Subject subject = new Subject();
         subject.setSubjectCode(dto.getSubjectCode());
@@ -38,7 +37,6 @@ public class SubjectService {
         return mapToResponse(saved);
     }
 
-    // 🔥 GET ALL SUBJECTS
     public List<SubjectResponseDTO> getAllSubjects() {
         return subjectRepository.findAll()
                 .stream()
@@ -46,7 +44,6 @@ public class SubjectService {
                 .toList();
     }
 
-    // 🔥 GET SUBJECT BY ID
     public SubjectResponseDTO getSubjectById(Long id) {
         Subject subject = subjectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Subject not found"));
@@ -54,11 +51,12 @@ public class SubjectService {
         return mapToResponse(subject);
     }
 
-    // 🔥 UPDATE SUBJECT
     public SubjectResponseDTO updateSubject(Long id, SubjectRequestDTO dto) {
 
         Subject subject = subjectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Subject not found"));
+
+        validateMarks(dto);
 
         subject.setSubjectCode(dto.getSubjectCode());
         subject.setSubjectName(dto.getSubjectName());
@@ -72,7 +70,6 @@ public class SubjectService {
         return mapToResponse(updated);
     }
 
-    // 🔥 DELETE SUBJECT
     public void deleteSubject(Long id) {
         Subject subject = subjectRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Subject not found"));
@@ -80,7 +77,6 @@ public class SubjectService {
         subjectRepository.delete(subject);
     }
 
-    // 🔥 FILTER BY BRANCH + SEMESTER (OPTIONAL BUT STRONG)
     public List<SubjectResponseDTO> getByBranchAndSemester(String branch, int semester) {
         return subjectRepository.findByBranchAndSemester(branch, semester)
                 .stream()
@@ -88,7 +84,23 @@ public class SubjectService {
                 .toList();
     }
 
-    // 🔥 MAPPER METHOD
+    private void validateMarks(SubjectRequestDTO dto) {
+
+        Integer theory = dto.getTheoryMarks();
+        Integer practical = dto.getPracticalMarks();
+
+        if (theory != null && practical != null) {
+            int total = theory + practical;
+
+            if (total > 100) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Total marks should not exceed 100"
+                );
+            }
+        }
+    }
+
     private SubjectResponseDTO mapToResponse(Subject subject) {
         SubjectResponseDTO dto = new SubjectResponseDTO();
 

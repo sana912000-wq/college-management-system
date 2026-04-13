@@ -2,7 +2,6 @@ package com.sana.cms.repository;
 
 import com.sana.cms.entity.Attendance;
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDate;
 import java.util.List;
 

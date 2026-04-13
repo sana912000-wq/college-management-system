@@ -16,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -29,33 +28,26 @@ public class AttendanceService {
     private final CourseRepository courseRepository;
     private final FacultyPersonalRepository facultyRepository;
 
-    // ✅ MARK ATTENDANCE
     public AttendanceResponseDTO markAttendance(AttendanceRequestDTO dto) {
 
-        // 1. Validate student
         Student student = studentRepository.findById(dto.getStudentId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found"));
 
-        // 2. Validate course
         Course course = courseRepository.findById(dto.getCourseId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        // 3. Get logged-in faculty
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
 
         FacultyPersonal faculty = facultyRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Faculty not found"));
 
-        // 4. Validate status
         if (!List.of("PRESENT", "ABSENT", "LEAVE").contains(dto.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid status");
         }
 
-        // 5. Handle date
         LocalDate date = dto.getClassDate() != null ? dto.getClassDate() : LocalDate.now();
 
-        // 6. Prevent duplicate attendance
         if (attendanceRepository.existsByStudentIdAndCourseIdAndClassDate(
                 dto.getStudentId(),
                 dto.getCourseId(),
@@ -64,7 +56,6 @@ public class AttendanceService {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Attendance already marked for this date");
         }
 
-        // 7. Save
         Attendance attendance = new Attendance();
         attendance.setStudent(student);
         attendance.setCourse(course);
@@ -77,7 +68,6 @@ public class AttendanceService {
         return mapToResponse(saved);
     }
 
-    // ✅ GET ALL
     public List<AttendanceResponseDTO> getAllAttendance() {
         return attendanceRepository.findAll()
                 .stream()
@@ -85,7 +75,6 @@ public class AttendanceService {
                 .toList();
     }
 
-    // ✅ GET BY STUDENT
     public List<AttendanceResponseDTO> getByStudent(Long studentId) {
 
         if (!studentRepository.existsById(studentId)) {
@@ -98,7 +87,6 @@ public class AttendanceService {
                 .toList();
     }
 
-    // ✅ GET BY COURSE
     public List<AttendanceResponseDTO> getByCourse(Long courseId) {
 
         if (!courseRepository.existsById(courseId)) {
@@ -111,13 +99,11 @@ public class AttendanceService {
                 .toList();
     }
 
-    // ✅ UPDATE ATTENDANCE
     public AttendanceResponseDTO updateAttendance(Long id, AttendanceRequestDTO dto) {
 
         Attendance attendance = attendanceRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendance not found"));
 
-        // Only status update allowed
         if (!List.of("PRESENT", "ABSENT", "LEAVE").contains(dto.getStatus())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid status");
         }
@@ -129,7 +115,6 @@ public class AttendanceService {
         return mapToResponse(updated);
     }
 
-    // ✅ DELETE (OPTIONAL)
     public void deleteAttendance(Long id) {
         Attendance attendance = attendanceRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendance not found"));
@@ -137,7 +122,6 @@ public class AttendanceService {
         attendanceRepository.delete(attendance);
     }
 
-    // ✅ RESPONSE MAPPING
     private AttendanceResponseDTO mapToResponse(Attendance a) {
         return new AttendanceResponseDTO(
                 a.getId(),

@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class CourseResponseDTO {
-
     private Long id;
     private String facultyName;
     private String subjectName;

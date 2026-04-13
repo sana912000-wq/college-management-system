@@ -3,7 +3,6 @@ package com.sana.cms.dto;
 import lombok.Data;
 
 @Data
-
 public class AdminRegisterDTO {
     private String name;
     private String email;

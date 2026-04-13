@@ -12,10 +12,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,16 +28,20 @@ public class FeePaymentService {
     private final StudentRepository studentRepository;
     private final FeeStructureRepository feeStructureRepository;
 
-    // ✅ CREATE PAYMENT
     public FeePaymentResponseDTO create(FeePaymentRequestDTO dto) {
 
-        Student student = studentRepository.findById(dto.getStudentId())
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+
+        Student student = studentRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Student not found"));
+                        HttpStatus.NOT_FOUND, "Student not found"
+                ));
 
         FeeStructure feeStructure = feeStructureRepository.findById(dto.getFeeStructureId())
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Fee structure not found"));
+                        HttpStatus.NOT_FOUND, "Fee structure not found"
+                ));
 
         FeePayment payment = new FeePayment();
 
@@ -44,7 +51,6 @@ public class FeePaymentService {
         payment.setPaymentDate(LocalDateTime.now());
         payment.setTransactionId(UUID.randomUUID().toString());
 
-        // 🔥 status logic
         if (dto.getAmountPaid().compareTo(feeStructure.getTotalFee()) >= 0) {
             payment.setPaymentStatus("COMPLETED");
         } else {
@@ -57,73 +63,66 @@ public class FeePaymentService {
         return mapToDTO(feePaymentRepository.save(payment));
     }
 
-    // ✅ GET ALL
     public List<FeePaymentResponseDTO> getAll() {
         return feePaymentRepository.findAll()
                 .stream()
                 .map(this::mapToDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
-    // ✅ GET BY ID
     public FeePaymentResponseDTO getById(Long id) {
         FeePayment payment = feePaymentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Payment not found"));
-
+                        HttpStatus.NOT_FOUND, "Payment not found"
+                ));
         return mapToDTO(payment);
     }
 
-    // 🔥 GET BY STUDENT (VERY IMPORTANT)
     public List<FeePaymentResponseDTO> getByStudent(Long studentId) {
+
+        if (!studentRepository.existsById(studentId)) {
+            return new ArrayList<>(); // no error, empty response
+        }
+
         return feePaymentRepository.findByStudentId(studentId)
                 .stream()
                 .map(this::mapToDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
-    // 🔥 GET BY STATUS
     public List<FeePaymentResponseDTO> getByStatus(String status) {
         return feePaymentRepository.findByPaymentStatus(status)
                 .stream()
                 .map(this::mapToDTO)
-                .toList();
+                .collect(Collectors.toList());
     }
 
-    // ✅ UPDATE STATUS
     public FeePaymentResponseDTO updateStatus(Long id, String status) {
-
         FeePayment payment = feePaymentRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Payment not found"));
+                        HttpStatus.NOT_FOUND, "Payment not found"
+                ));
 
         payment.setPaymentStatus(status);
 
         return mapToDTO(feePaymentRepository.save(payment));
     }
 
-    // ✅ DELETE
     public void delete(Long id) {
-        if (!feePaymentRepository.existsById(id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Payment not found");
-        }
-
         feePaymentRepository.deleteById(id);
     }
 
-    // 🔁 MAPPING
-    private FeePaymentResponseDTO mapToDTO(FeePayment p) {
+    private FeePaymentResponseDTO mapToDTO(FeePayment payment) {
 
         FeePaymentResponseDTO dto = new FeePaymentResponseDTO();
 
-        dto.setId(p.getId());
-        dto.setStudentId(p.getStudent().getId());
-        dto.setFeeStructureId(p.getFeeStructure().getId());
-        dto.setAmountPaid(p.getAmountPaid());
-        dto.setPaymentStatus(p.getPaymentStatus());
-        dto.setTransactionId(p.getTransactionId());
-        dto.setReceiptNumber(p.getReceiptNumber());
+        dto.setId(payment.getId());
+        dto.setStudentId(payment.getStudent().getId());
+        dto.setFeeStructureId(payment.getFeeStructure().getId());
+        dto.setAmountPaid(payment.getAmountPaid());
+        dto.setPaymentStatus(payment.getPaymentStatus());
+        dto.setTransactionId(payment.getTransactionId());
+        dto.setReceiptNumber(payment.getReceiptNumber());
 
         return dto;
     }

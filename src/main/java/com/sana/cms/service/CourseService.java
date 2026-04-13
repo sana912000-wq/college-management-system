@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class CourseService {
     private final EnrollmentRepository enrollmentRepository;
     private final AttendanceRepository attendanceRepository;
 
-    // ✅ CREATE COURSE
     public CourseResponseDTO createCourse(CourseRequestDTO dto) {
 
         FacultyPersonal faculty = facultyRepository.findById(dto.getFacultyId())
@@ -37,7 +35,6 @@ public class CourseService {
         Subject subject = subjectRepository.findById(dto.getSubjectId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Subject not found"));
 
-        // 🔥 duplicate check (perfect one)
         if (courseRepository.existsByFaculty_IdAndSubject_IdAndSemesterAndSectionAndAcademicYear(
                 dto.getFacultyId(),
                 dto.getSubjectId(),
@@ -60,7 +57,6 @@ public class CourseService {
         return mapToDTO(courseRepository.save(course));
     }
 
-    // ✅ GET ALL COURSES
     public List<CourseResponseDTO> getAllCourses() {
         return courseRepository.findAll()
                 .stream()
@@ -68,7 +64,6 @@ public class CourseService {
                 .toList();
     }
 
-    // ✅ GET COURSE BY ID
     public CourseResponseDTO getCourseById(Long id) {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
@@ -76,7 +71,6 @@ public class CourseService {
         return mapToDTO(course);
     }
 
-    // ✅ UPDATE COURSE
     public CourseResponseDTO updateCourse(Long id, CourseRequestDTO dto) {
 
         Course course = courseRepository.findById(id)
@@ -88,7 +82,6 @@ public class CourseService {
         Subject subject = subjectRepository.findById(dto.getSubjectId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Subject not found"));
 
-        // duplicate check (ignore same record)
         if (!course.getFaculty().getId().equals(dto.getFacultyId()) ||
                 !course.getSubject().getId().equals(dto.getSubjectId()) ||
                 !course.getSection().equals(dto.getSection()) ||
@@ -116,7 +109,6 @@ public class CourseService {
         return mapToDTO(courseRepository.save(course));
     }
 
-    // ✅ DELETE COURSE
     public void deleteCourse(Long id) {
 
         Course course = courseRepository.findById(id)
@@ -141,7 +133,6 @@ public class CourseService {
                 .toList();
     }
 
-    // 🔥 GET BY FACULTY
     public List<CourseResponseDTO> getByFaculty(Long facultyId) {
         return courseRepository.findByFacultyId(facultyId)
                 .stream()
@@ -149,7 +140,6 @@ public class CourseService {
                 .toList();
     }
 
-    // 🔥 FILTER
     public List<CourseResponseDTO> getBySemesterAndSection(int semester, String section) {
         return courseRepository.findBySemesterAndSection(semester, section)
                 .stream()
@@ -157,7 +147,6 @@ public class CourseService {
                 .toList();
     }
 
-    // ✅ MAPPING METHOD
     private CourseResponseDTO mapToDTO(Course course) {
 
         CourseResponseDTO dto = new CourseResponseDTO();

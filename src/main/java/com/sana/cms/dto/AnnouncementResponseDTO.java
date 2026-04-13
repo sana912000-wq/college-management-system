@@ -1,7 +1,6 @@
 package com.sana.cms.dto;
 
 import lombok.*;
-
 import java.time.LocalDate;
 
 @Data
@@ -10,7 +9,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AnnouncementResponseDTO {
-
     private Long id;
     private String title;
     private String description;

@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,7 +26,6 @@ public class MarksService {
     private final SubjectRepository subjectRepository;
     private final CourseRepository courseRepository;
 
-    // ✅ CREATE MARKS
     public MarksResponseDTO createMarks(MarksRequestDTO dto) {
 
         Student student = studentRepository.findById(dto.getStudentId())
@@ -39,7 +37,6 @@ public class MarksService {
         Course course = courseRepository.findById(dto.getCourseId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Course not found"));
 
-        // ❗ prevent duplicate marks
         boolean exists = marksRepository.existsByStudentIdAndSubjectIdAndCourseId(
                 dto.getStudentId(), dto.getSubjectId(), dto.getCourseId()
         );
@@ -66,7 +63,6 @@ public class MarksService {
         return mapToDTO(marksRepository.save(marks));
     }
 
-    // ✅ GET ALL
     public List<MarksResponseDTO> getAllMarks() {
         return marksRepository.findAll()
                 .stream()
@@ -74,7 +70,6 @@ public class MarksService {
                 .toList();
     }
 
-    // ✅ GET BY ID
     public MarksResponseDTO getMarksById(Long id) {
         Marks marks = marksRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Marks not found"));
@@ -82,15 +77,20 @@ public class MarksService {
         return mapToDTO(marks);
     }
 
-    // ✅ GET BY STUDENT
     public List<MarksResponseDTO> getMarksByStudent(Long studentId) {
-        return marksRepository.findByStudentId(studentId)
-                .stream()
+
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Student not found"
+                ));
+
+        List<Marks> marksList = marksRepository.findByStudentId(studentId);
+
+        return marksList.stream()
                 .map(this::mapToDTO)
                 .toList();
     }
 
-    // ✅ GET BY COURSE
     public List<MarksResponseDTO> getMarksByCourse(Long courseId) {
         return marksRepository.findByCourseId(courseId)
                 .stream()
@@ -98,7 +98,6 @@ public class MarksService {
                 .toList();
     }
 
-    // ✅ UPDATE MARKS
     public MarksResponseDTO updateMarks(Long id, MarksRequestDTO dto) {
 
         Marks marks = marksRepository.findById(id)
@@ -118,7 +117,6 @@ public class MarksService {
         return mapToDTO(marksRepository.save(marks));
     }
 
-    // ✅ DELETE
     public void deleteMarks(Long id) {
         if (!marksRepository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Marks not found");
@@ -126,7 +124,6 @@ public class MarksService {
         marksRepository.deleteById(id);
     }
 
-    // 🔥 GRADE LOGIC
     private String calculateGrade(int total) {
         if (total >= 90) return "A+";
         else if (total >= 80) return "A";
@@ -137,7 +134,6 @@ public class MarksService {
         else return "F";
     }
 
-    // 🔁 MAPPING
     private MarksResponseDTO mapToDTO(Marks marks) {
         MarksResponseDTO dto = new MarksResponseDTO();
         dto.setId(marks.getId());

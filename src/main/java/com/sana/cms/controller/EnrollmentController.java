@@ -2,8 +2,10 @@ package com.sana.cms.controller;
 
 import com.sana.cms.dto.EnrollmentRequestDTO;
 import com.sana.cms.service.EnrollmentService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,44 +15,45 @@ public class EnrollmentController {
 
     private final EnrollmentService enrollmentService;
 
-    // ✅ ENROLL
     @PostMapping
-    public ResponseEntity<?> enroll(@RequestBody EnrollmentRequestDTO dto) {
+    @PreAuthorize("hasAnyRole('ADMIN','FACULTY')")
+    public ResponseEntity<?> enroll(@RequestBody @Valid EnrollmentRequestDTO dto) {
         return ResponseEntity.ok(enrollmentService.enrollStudent(dto));
     }
 
-    // ✅ GET ALL
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(enrollmentService.getAllEnrollments());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','FACULTY')")
     public ResponseEntity<?> getById(@PathVariable Long id) {
         return ResponseEntity.ok(enrollmentService.getById(id));
     }
 
-    // ✅ GET BY STUDENT
     @GetMapping("/student/{studentId}")
+    @PreAuthorize("hasAnyRole('ADMIN','FACULTY')")
     public ResponseEntity<?> getByStudent(@PathVariable Long studentId) {
         return ResponseEntity.ok(enrollmentService.getByStudent(studentId));
     }
 
-    // ✅ GET BY COURSE
     @GetMapping("/course/{courseId}")
+    @PreAuthorize("hasAnyRole('ADMIN','FACULTY')")
     public ResponseEntity<?> getByCourse(@PathVariable Long courseId) {
         return ResponseEntity.ok(enrollmentService.getByCourse(courseId));
     }
 
-    // ✅ UPDATE STATUS
     @PutMapping("/{id}/status")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateStatus(@PathVariable Long id,
-                                          @RequestParam String status) {
+                                          @RequestParam @Valid String status) {
         return ResponseEntity.ok(enrollmentService.updateStatus(id, status));
     }
 
-    // ✅ DELETE
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         enrollmentService.deleteEnrollment(id);
         return ResponseEntity.ok("Enrollment deleted");

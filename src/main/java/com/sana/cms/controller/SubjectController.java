@@ -3,11 +3,16 @@ package com.sana.cms.controller;
 import com.sana.cms.dto.SubjectRequestDTO;
 import com.sana.cms.service.SubjectService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
 @RestController
 @RequestMapping("/api/admin/subjects")
 @RequiredArgsConstructor
@@ -29,7 +34,7 @@ public class SubjectController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(
             @PathVariable Long id,
-            @RequestBody SubjectRequestDTO dto) {
+            @RequestBody @Valid SubjectRequestDTO dto) {
         return ResponseEntity.ok(subjectService.updateSubject(id, dto));
     }
 
@@ -46,8 +51,11 @@ public class SubjectController {
 
     @GetMapping("/filter")
     public ResponseEntity<?> getByBranchAndSemester(
-            @RequestParam String branch,
-            @RequestParam int semester) {
-        return ResponseEntity.ok(subjectService.getByBranchAndSemester(branch, semester));
+            @RequestParam @NotBlank String branch,
+            @RequestParam @Min(1) @Max(8) int semester) {
+
+        return ResponseEntity.ok(
+                subjectService.getByBranchAndSemester(branch, semester)
+        );
     }
 }

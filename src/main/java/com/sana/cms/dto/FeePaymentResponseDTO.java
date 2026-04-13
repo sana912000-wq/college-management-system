@@ -1,7 +1,6 @@
 package com.sana.cms.dto;
 
 import lombok.*;
-
 import java.math.BigDecimal;
 
 @Data
@@ -10,7 +9,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class FeePaymentResponseDTO {
-
     private Long id;
     private Long studentId;
     private Long feeStructureId;

@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class SubjectResponseDTO {
-
     private Long id;
     private String subjectCode;
     private String subjectName;

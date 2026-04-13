@@ -8,9 +8,10 @@ import com.sana.cms.repository.AdminRepository;
 import com.sana.cms.repository.AnnouncementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,10 +23,12 @@ public class AnnouncementService {
     private final AnnouncementRepository announcementRepository;
     private final AdminRepository adminRepository;
 
-    // ✅ CREATE
     public AnnouncementResponseDTO create(AnnouncementRequestDTO dto) {
 
-        Admin admin = adminRepository.findById(dto.getAdminId())
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+
+        Admin admin = adminRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Admin not found"));
 
@@ -41,7 +44,6 @@ public class AnnouncementService {
         return mapToDTO(announcementRepository.save(a));
     }
 
-    // ✅ GET ALL
     public List<AnnouncementResponseDTO> getAll() {
         return announcementRepository.findAll()
                 .stream()
@@ -49,9 +51,7 @@ public class AnnouncementService {
                 .toList();
     }
 
-    // ✅ GET BY ID
     public AnnouncementResponseDTO getById(Long id) {
-
         Announcement a = announcementRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Announcement not found"));
@@ -59,14 +59,15 @@ public class AnnouncementService {
         return mapToDTO(a);
     }
 
-    // 🔥 GET ACTIVE
     public List<AnnouncementResponseDTO> getActive() {
 
         LocalDate today = LocalDate.now();
 
         return announcementRepository.findAll()
                 .stream()
-                .filter(a -> a.getExpiresAt() == null || !a.getExpiresAt().isBefore(today))
+                .filter(a ->
+                        a.getExpiresAt() == null ||
+                                !a.getExpiresAt().isBefore(today))
                 .map(this::mapToDTO)
                 .toList();
     }
@@ -77,20 +78,10 @@ public class AnnouncementService {
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Announcement not found"));
 
-        // update fields
         a.setTitle(dto.getTitle());
         a.setDescription(dto.getDescription());
         a.setTargetAudience(dto.getTargetAudience());
         a.setExpiresAt(dto.getExpiresAt());
-
-        // 🔥 if adminId is present → update admin also
-        if (dto.getAdminId() != null) {
-            Admin admin = adminRepository.findById(dto.getAdminId())
-                    .orElseThrow(() -> new ResponseStatusException(
-                            HttpStatus.NOT_FOUND, "Admin not found"));
-
-            a.setCreatedBy(admin);
-        }
 
         return mapToDTO(announcementRepository.save(a));
     }
@@ -106,14 +97,12 @@ public class AnnouncementService {
     }
 
     public List<AnnouncementResponseDTO> getByTarget(String target) {
-
         return announcementRepository.findByTargetAudience(target)
                 .stream()
                 .map(this::mapToDTO)
                 .toList();
     }
 
-    // 🔁 MAPPING (FIXED)
     private AnnouncementResponseDTO mapToDTO(Announcement a) {
 
         AnnouncementResponseDTO dto = new AnnouncementResponseDTO();
@@ -121,12 +110,7 @@ public class AnnouncementService {
         dto.setId(a.getId());
         dto.setTitle(a.getTitle());
         dto.setDescription(a.getDescription());
-
-        // ✅ FIX: convert Admin → String
         dto.setCreatedBy(a.getCreatedBy().getName());
-        // OR use email:
-        // dto.setCreatedBy(a.getCreatedBy().getEmail());
-
         dto.setTargetAudience(a.getTargetAudience());
         dto.setExpiresAt(a.getExpiresAt());
 

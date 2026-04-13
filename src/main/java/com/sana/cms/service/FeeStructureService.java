@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,10 +18,8 @@ public class FeeStructureService {
 
     private final FeeStructureRepository feeStructureRepository;
 
-    // ✅ CREATE
     public FeeStructureResponseDTO create(FeeStructureRequestDTO dto) {
 
-        // ❗ prevent duplicate (same branch + semester)
         boolean exists = feeStructureRepository
                 .existsByBranchAndSemester(dto.getBranch(), dto.getSemester());
 
@@ -42,7 +39,6 @@ public class FeeStructureService {
         fee.setLibraryFee(dto.getLibraryFee());
         fee.setLabFee(dto.getLabFee());
 
-        // 🔥 calculate total automatically
         BigDecimal total = dto.getTuitionFee()
                 .add(dto.getHostelFee())
                 .add(dto.getLibraryFee())
@@ -57,7 +53,6 @@ public class FeeStructureService {
         return mapToDTO(feeStructureRepository.save(fee));
     }
 
-    // ✅ GET ALL
     public List<FeeStructureResponseDTO> getAll() {
 
         return feeStructureRepository.findAll()
@@ -66,7 +61,6 @@ public class FeeStructureService {
                 .toList();
     }
 
-    // ✅ GET BY ID
     public FeeStructureResponseDTO getById(Long id) {
 
         FeeStructure fee = feeStructureRepository.findById(id)
@@ -76,7 +70,6 @@ public class FeeStructureService {
         return mapToDTO(fee);
     }
 
-    // 🔥 GET BY BRANCH + SEMESTER (IMPORTANT)
     public FeeStructureResponseDTO getByBranchAndSemester(String branch, int semester) {
 
         FeeStructure fee = feeStructureRepository
@@ -89,7 +82,6 @@ public class FeeStructureService {
         return mapToDTO(fee);
     }
 
-    // ✅ UPDATE
     public FeeStructureResponseDTO update(Long id, FeeStructureRequestDTO dto) {
 
         FeeStructure fee = feeStructureRepository.findById(id)
@@ -103,7 +95,6 @@ public class FeeStructureService {
         fee.setLibraryFee(dto.getLibraryFee());
         fee.setLabFee(dto.getLabFee());
 
-        // 🔥 recalculate total
         BigDecimal total = dto.getTuitionFee()
                 .add(dto.getHostelFee())
                 .add(dto.getLibraryFee())
@@ -117,7 +108,6 @@ public class FeeStructureService {
         return mapToDTO(feeStructureRepository.save(fee));
     }
 
-    // ✅ DELETE
     public void delete(Long id) {
 
         if (!feeStructureRepository.existsById(id)) {
@@ -130,7 +120,6 @@ public class FeeStructureService {
         feeStructureRepository.deleteById(id);
     }
 
-    // 🔁 MAPPING
     private FeeStructureResponseDTO mapToDTO(FeeStructure fee) {
 
         FeeStructureResponseDTO dto = new FeeStructureResponseDTO();
