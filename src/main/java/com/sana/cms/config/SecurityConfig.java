@@ -41,7 +41,10 @@ public class SecurityConfig {
                                 "/api/auth/admin/login",
                                 "/api/auth/forgot-password",
                                 "/api/auth/reset-password",
-                                "api/auth/change-password"
+                                "api/auth/change-password",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**"
                         ).permitAll()
 
                         .requestMatchers("/api/auth/admin/**").hasRole("ADMIN")
