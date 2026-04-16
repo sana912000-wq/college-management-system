@@ -1,0 +1,70 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Login</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+      <!-- INSTRUCTION -->
+      <div class="instruction" *ngIf="!loginForm.value.role">
+        Please select your role to continue
+      </div>
+
+      <!-- ROLE -->
+      <div class="role-group">
+        <label>
+          <input type="radio" formControlName="role" value="STUDENT" />
+          Student
+        </label>
+
+        <label>
+          <input type="radio" formControlName="role" value="FACULTY" />
+          Faculty
+        </label>
+
+        <label>
+          <input type="radio" formControlName="role" value="ADMIN" />
+          Admin
+        </label>
+      </div>
+
+      <!-- EMAIL -->
+      <input type="email" placeholder="Email" formControlName="email" />
+
+      <div class="error"
+        *ngIf="(submitted || f['email'].touched) && f['email'].errors">
+        <span *ngIf="f['email'].errors?.['required']">Email is required</span>
+        <span *ngIf="f['email'].errors?.['email']">Invalid email</span>
+      </div>
+
+      <!-- PASSWORD -->
+      <input type="password" placeholder="Password" formControlName="password" />
+
+      <div class="error"
+        *ngIf="(submitted || f['password'].touched) && f['password'].errors">
+        Password is required
+      </div>
+
+      <!-- SUCCESS MESSAGE -->
+      <div class="success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+
+      <!-- ERROR MESSAGE -->
+      <div class="error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- BUTTON -->
+      <button type="submit" [disabled]="loginForm.invalid">
+        Login
+      </button>
+
+    </form>
+
+    <!-- REGISTER LINK -->
+    <p class="register-text">
+      Don’t have an account?
+      <span (click)="goToRegister()">Register</span>
+    </p>
+  </div>
+</div>
