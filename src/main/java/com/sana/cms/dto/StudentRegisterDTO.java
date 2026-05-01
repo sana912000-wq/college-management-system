@@ -23,5 +23,4 @@ public class StudentRegisterDTO {
 
         private Integer enrollmentYear;
 
-        private String rollNo;
 }

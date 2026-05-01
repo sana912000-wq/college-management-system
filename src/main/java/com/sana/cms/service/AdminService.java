@@ -1,7 +1,9 @@
 package com.sana.cms.service;
 
+import com.sana.cms.dto.JwtResponseDTO;
 import com.sana.cms.dto.LoginDTO;
 import com.sana.cms.dto.AdminRegisterDTO;
+import com.sana.cms.dto.RegisterResponseDTO;
 import com.sana.cms.entity.Admin;
 import com.sana.cms.repository.AdminRepository;
 import com.sana.cms.util.JwtUtil;
@@ -22,10 +24,9 @@ public class AdminService {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
+    public RegisterResponseDTO register(AdminRegisterDTO dto) {
 
-    public Map<String, Object> register(AdminRegisterDTO dto) {
-
-        PasswordValidator. validate(dto.getPassword());
+        PasswordValidator.validate(dto.getPassword());
 
         if (adminRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new ResponseStatusException(
@@ -45,12 +46,12 @@ public class AdminService {
 
             adminRepository.save(admin);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("id", admin.getId());
-            response.put("name", admin.getName());
-            response.put("email", admin.getEmail());
-            response.put("role", "ADMIN");
-            response.put("message", "Admin registration successful. Please login.");
+            RegisterResponseDTO response = new RegisterResponseDTO();
+            response.setId(admin.getId());
+            response.setName(admin.getName());
+            response.setEmail(admin.getEmail());
+            response.setRole("ADMIN");
+            response.setMessage("Admin registration successful. Please login.");
 
             return response;
 
@@ -62,7 +63,7 @@ public class AdminService {
         }
     }
 
-    public Map<String, Object> login(LoginDTO dto) {
+    public JwtResponseDTO login(LoginDTO dto) {
 
         Admin admin = adminRepository.findByEmail(dto.getEmail())
                 .orElse(null);
@@ -80,13 +81,12 @@ public class AdminService {
                 admin.getId()
         );
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("type", "Bearer");
-        response.put("userId", admin.getId());
-        response.put("email", admin.getEmail());
-        response.put("name", admin.getName());
-        response.put("role", "ADMIN");
+        JwtResponseDTO response = new JwtResponseDTO();
+        response.setToken(token);
+        response.setUserId(admin.getId());
+        response.setName(admin.getName());
+        response.setEmail(admin.getEmail());
+        response.setRole("ADMIN");
 
         return response;
     }
