@@ -1,4 +1,4 @@
-FROM openjdk:17
+FROM eclipse-termium:17-jdk
 
 WORKDIR /app
 
