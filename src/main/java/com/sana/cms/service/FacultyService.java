@@ -1,7 +1,9 @@
 package com.sana.cms.service;
 
 import com.sana.cms.dto.FacultyRegisterDTO;
+import com.sana.cms.dto.JwtResponseDTO;
 import com.sana.cms.dto.LoginDTO;
+import com.sana.cms.dto.RegisterResponseDTO;
 import com.sana.cms.entity.FacultyPersonal;
 import com.sana.cms.repository.FacultyPersonalRepository;
 import com.sana.cms.util.JwtUtil;
@@ -23,12 +25,15 @@ public class FacultyService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    public Map<String,Object> register(FacultyRegisterDTO dto) {
+    public RegisterResponseDTO register(FacultyRegisterDTO dto) {
 
-        PasswordValidator. validate(dto.getPassword());
+        PasswordValidator.validate(dto.getPassword());
 
         if (facultyPersonalRepository.findByEmail(dto.getEmail()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already registered");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Email already registered"
+            );
         }
 
         try {
@@ -43,28 +48,33 @@ public class FacultyService {
 
             facultyPersonalRepository.save(faculty);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("id", faculty.getId());
-            response.put("name", faculty.getName());
-            response.put("email", faculty.getEmail());
-            response.put("role", "FACULTY");
-            response.put("message", "Registration successful. Please login.");
+            // ✅ DTO instead of Map
+            RegisterResponseDTO response = new RegisterResponseDTO();
+            response.setId(faculty.getId());
+            response.setName(faculty.getName());
+            response.setEmail(faculty.getEmail());
+            response.setRole("FACULTY");
+            response.setMessage("Faculty registration successful. Please login.");
 
             return response;
 
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Error while registering faculty"
+            );
         }
     }
+    public JwtResponseDTO login(LoginDTO dto) {
 
-
-    public Map<String,Object> login(LoginDTO dto) {
-        FacultyPersonal faculty = facultyPersonalRepository
-                .findByEmail(dto.getEmail())
+        FacultyPersonal faculty = facultyPersonalRepository.findByEmail(dto.getEmail())
                 .orElse(null);
 
         if (faculty == null || !encoder.matches(dto.getPassword(), faculty.getPasswordHash())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "Invalid email or password"
+            );
         }
 
         String token = JwtUtil.generateToken(
@@ -73,13 +83,12 @@ public class FacultyService {
                 faculty.getId()
         );
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("type", "Bearer");
-        response.put("userId", faculty.getId());
-        response.put("email", faculty.getEmail());
-        response.put("name", faculty.getName());
-        response.put("role", "FACULTY");
+        JwtResponseDTO response = new JwtResponseDTO();
+        response.setToken(token);
+        response.setUserId(faculty.getId());
+        response.setName(faculty.getName());
+        response.setEmail(faculty.getEmail());
+        response.setRole("FACULTY");
 
         return response;
     }

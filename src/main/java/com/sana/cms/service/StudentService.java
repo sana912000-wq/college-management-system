@@ -1,6 +1,8 @@
 package com.sana.cms.service;
 
+import com.sana.cms.dto.JwtResponseDTO;
 import com.sana.cms.dto.LoginDTO;
+import com.sana.cms.dto.RegisterResponseDTO;
 import com.sana.cms.dto.StudentRegisterDTO;
 import com.sana.cms.entity.Student;
 import com.sana.cms.repository.StudentRepository;
@@ -24,9 +26,9 @@ public class StudentService {
     private BCryptPasswordEncoder encoder;
 
 
-    public Map<String, Object> register(StudentRegisterDTO dto) {
+    public RegisterResponseDTO register(StudentRegisterDTO dto) {
 
-       PasswordValidator. validate(dto.getPassword());
+        PasswordValidator.validate(dto.getPassword());
 
         if (studentRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new ResponseStatusException(
@@ -44,16 +46,16 @@ public class StudentService {
             student.setPasswordHash(encoder.encode(dto.getPassword()));
             student.setBranch(dto.getBranch());
             student.setEnrollmentYear(dto.getEnrollmentYear());
-            student.setRollNo(dto.getRollNo());
 
             studentRepository.save(student);
 
-            Map<String, Object> response = new HashMap<>();
-            response.put("id", student.getId());
-            response.put("name", student.getName());
-            response.put("email", student.getEmail());
-            response.put("role", "STUDENT");
-            response.put("message", "Registration successful. Please login.");
+            // ✅ DTO instead of Map
+            RegisterResponseDTO response = new RegisterResponseDTO();
+            response.setId(student.getId());
+            response.setName(student.getName());
+            response.setEmail(student.getEmail());
+            response.setRole("STUDENT");
+            response.setMessage("Registration successful. Please login.");
 
             return response;
 
@@ -66,8 +68,7 @@ public class StudentService {
             );
         }
     }
-
-    public Map<String, Object> login(LoginDTO dto) {
+    public JwtResponseDTO login(LoginDTO dto) {
 
         Student student = studentRepository.findByEmail(dto.getEmail())
                 .orElse(null);
@@ -85,13 +86,12 @@ public class StudentService {
                 student.getId()
         );
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("type", "Bearer");
-        response.put("userId", student.getId());
-        response.put("email", student.getEmail());
-        response.put("name", student.getName());
-        response.put("role", "STUDENT");
+        JwtResponseDTO response = new JwtResponseDTO();
+        response.setToken(token);
+        response.setUserId(student.getId());
+        response.setName(student.getName());
+        response.setEmail(student.getEmail());
+        response.setRole("STUDENT");
 
         return response;
     }

@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class JwtResponseDTO {
     private String token;
     private String type = "Bearer";
     private Long userId;
-    private String role;
+    private String name;
     private String email;
+    private String role;
 }

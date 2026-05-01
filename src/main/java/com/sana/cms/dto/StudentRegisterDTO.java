@@ -2,11 +2,9 @@ package com.sana.cms.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-
 public class StudentRegisterDTO {
         @NotBlank(message = "Name is Required")
         private String name;
@@ -25,5 +23,4 @@ public class StudentRegisterDTO {
 
         private Integer enrollmentYear;
 
-        private String rollNo;
 }

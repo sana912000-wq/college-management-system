@@ -9,458 +9,2332 @@
   },
   "item": [
     {
-      "name": "Student Register",
-      "request": {
-        "auth": {
-          "type": "noauth"
+      "name": "Student",
+      "item": [
+        {
+          "name": "Student Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"sana\",\r\n    \"email\": \"sana101@gmail.com\",\r\n    \"phone\": \"7981455400\",\r\n    \"password\": \"Zananas@1209\",\r\n    \"branch\": \"ECE\",\r\n    \"enrollmentYear\": 2019\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/student/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "student",
+                "register"
+              ]
+            },
+            "description": "STUDENT REGISTER"
+          },
+          "response": []
         },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"name\": \"sana\",\r\n    \"email\": \"sana10@gmail.com\",\r\n    \"phone\": \"7981455400\",\r\n    \"password\": \"Zananas@\",\r\n    \"branch\": \"ECE\",\r\n    \"enrollmentYear\": 2019\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Student Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"sana1@gmail.com\",\r\n    \"password\": \"Zanans@\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/student/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "student",
+                "login"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/student/register",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "student",
-            "register"
-          ]
-        },
-        "description": "STUDENT REGISTER"
-      },
-      "response": []
-    },
-    {
-      "name": "Faculty Register",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"name\": \"sana\",\r\n    \"email\": \"sana1@gmail.com\",\r\n    \"phone\": \"7981455400\",\r\n    \"password\": \"Zananas@\",\r\n    \"department\":\"ECE\",\r\n    \"designation\":\"professor\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Student Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaXlhMjAwMEBnbWFpbC5jb20iLCJyb2xlIjoiU1RVREVOVCIsInVzZXJJZCI6MzYsImlhdCI6MTc3NDgwNDk0MywiZXhwIjoxNzc0ODQwOTQzfQ.8J-gPhsGOfl4zhb6wZulRQ_rBQ9f_mKg-sCN_Bady-",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/student/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "student",
+                "profile"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/faculty/register",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "faculty",
-            "register"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Faculty Login",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"email\": \"test@gmail.com' __\",\r\n    \"password\": \"Zananas@!\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Update Student Profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/student/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "student",
+                "profile"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/faculty/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "faculty",
-            "login"
-          ]
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Student Login",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"email\": \"sana1@gmail.com\",\r\n    \"password\": \"Zanans@\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+      "name": "Faculty",
+      "item": [
+        {
+          "name": "Faculty Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"sana\",\r\n    \"email\": \"sana1111@gmail.com\",\r\n    \"phone\": \"7981455400\",\r\n    \"password\": \"Zananas@1209\",\r\n    \"department\":\"ECE\",\r\n    \"designation\":\"professor\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/faculty/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "faculty",
+                "register"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/student/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "student",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Admin Login",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Faculty Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"sana1111@gmail.com\",\r\n    \"password\": \"Zananas@1209\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/faculty/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "faculty",
+                "login"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/admin/login",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "admin",
-            "login"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Admin Register",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Faculty Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "http://localhost:8080/api/auth/faculty/login",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/faculty/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "faculty",
+                "profile"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/admin/register",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "admin",
-            "register"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Student Profile",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaXlhMjAwMEBnbWFpbC5jb20iLCJyb2xlIjoiU1RVREVOVCIsInVzZXJJZCI6MzYsImlhdCI6MTc3NDgwNDk0MywiZXhwIjoxNzc0ODQwOTQzfQ.8J-gPhsGOfl4zhb6wZulRQ_rBQ9f_mKg-sCN_Bady-",
-              "type": "string"
+        {
+          "name": "Update Faculty Profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/faculty/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "faculty",
+                "profile"
+              ]
             }
-          ]
-        },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8080/api/auth/student/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "student",
-            "profile"
-          ]
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Faculty Profile",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "http://localhost:8080/api/auth/faculty/login",
-              "type": "string"
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/admin/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "admin",
+                "login"
+              ]
             }
-          ]
+          },
+          "response": []
         },
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8080/api/auth/faculty/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "faculty",
-            "profile"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Admin Profile",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8080/api/auth/admin/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "admin",
-            "profile"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Forgot password",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\":\"riya2000@gmail.com\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Admin Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/admin/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "admin",
+                "register"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/forgot-password",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "forgot-password"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "reset-password",
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n     \"token\": \"3d1a52e0-9e14-4503-bc75-105d1408a627\",\r\n     \"newPassword\":\"zan\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+        {
+          "name": "Admin Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/admin/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "admin",
+                "profile"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/reset-password",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "reset-password"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "change-password",
-      "request": {
-        "auth": {
-          "type": "bearer",
-          "bearer": [
-            {
-              "key": "token",
-              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaXlhMjAwMEBnbWFpbC5jb20iLCJyb2xlIjoiU1RVREVOVCIsInVzZXJJZCI6MzYsImlhdCI6MTc3NDg3MDgxOCwiZXhwIjoxNzc0OTA2ODE4fQ.Ug7tt8bX4oxfACmFq7Y51DWbwwJXNarxb8FaeWxEplw",
-              "type": "string"
+        {
+          "name": "Update Admin Profile",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/student/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "student",
+                "profile"
+              ]
             }
-          ]
-        },
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n    \"email\": \"riya2000@gmail.com\",\r\n    \"oldPassword\": \"Sananaz@1209\",\r\n    \"newPassword\":\"Zananas@1234\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "password",
+      "item": [
+        {
+          "name": "Forgot password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"riya2000@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "forgot-password"
+              ]
             }
-          }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/change-password",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "change-password"
-          ]
+        {
+          "name": "reset-password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n     \"token\": \"3d1a52e0-9e14-4503-bc75-105d1408a627\",\r\n     \"newPassword\":\"zan\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "reset-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change-password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyaXlhMjAwMEBnbWFpbC5jb20iLCJyb2xlIjoiU1RVREVOVCIsInVzZXJJZCI6MzYsImlhdCI6MTc3NDg3MDgxOCwiZXhwIjoxNzc0OTA2ODE4fQ.Ug7tt8bX4oxfACmFq7Y51DWbwwJXNarxb8FaeWxEplw",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"riya2000@gmail.com\",\r\n    \"oldPassword\": \"Sananaz@1209\",\r\n    \"newPassword\":\"Zananas@1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/change-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Update Student Profile",
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": ""
+      "name": "Subjects",
+      "item": [
+        {
+          "name": "Create Subject",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"subjectCode\": \"CS116\",\r\n  \"subjectName\": \"Data Structures\",\r\n  \"branch\": \"CSE\",\r\n  \"semester\": 3,\r\n  \"credits\": 4,\r\n  \"theoryMarks\": 70,\r\n  \"practicalMarks\": 29\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/subjects",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "subjects"
+              ]
+            }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/student/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "student",
-            "profile"
-          ]
+        {
+          "name": "Get all subjects",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/subjects",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "subjects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Subject",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"subjectCode\": \"CS200\",\r\n  \"subjectName\": \"Operating Systems\",\r\n  \"branch\": \"CSE\",\r\n  \"semester\": 8,\r\n  \"credits\": 4,\r\n  \"theoryMarks\": 70,\r\n  \"practicalMarks\": 30\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/subjects/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "subjects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Subject",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/subjects/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "subjects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/subjects/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "subjects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by branch and semester",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/subjects/filter?branch=CSE",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "admin",
+                "subjects",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "branch",
+                  "value": "CSE"
+                }
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Update Faculty Profile",
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": ""
+      "name": "Courses",
+      "item": [
+        {
+          "name": "Create Course",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"facultyId\": 3,\r\n  \"subjectId\": 1,\r\n  \"semester\": 7,\r\n  \"section\": \"C\",\r\n  \"academicYear\": \"2024\",\r\n  \"totalClasses\": 60\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/courses",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses"
+              ]
+            }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/faculty/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "faculty",
-            "profile"
-          ]
+        {
+          "name": "Get all courses",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3MjE5OCwiZXhwIjoxNzc2MTA4MTk4fQ.ewMxNXqefJDrvrTbUSZElAwVWHVmVwOgbrWsvq36oEc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/courses",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get course by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/courses/100",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses",
+                "100"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update course by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"facultyId\": 3,\r\n  \"subjectId\": 4,\r\n  \"semester\": 7,\r\n  \"section\": \"B\",\r\n  \"academicYear\": \"2023\",\r\n  \"totalClasses\": 67\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/courses/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete  course by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/courses/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by Subject ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/courses/subject/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses",
+                "subject",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by faculty ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/courses/faculty/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses",
+                "faculty",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by semester and section",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/courses/filter?section=A",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "courses",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "section",
+                  "value": "A"
+                }
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Update Admin Profile",
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": ""
+      "name": "Enrollments",
+      "item": [
+        {
+          "name": "Create enrollments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"studentId\": 32,\r\n  \"subjectId\": 1,\r\n  \"courseId\": 1,\r\n  \"semester\": 3,\r\n  \"academicYear\": \"2024\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments"
+              ]
+            }
+          },
+          "response": []
         },
-        "url": {
-          "raw": "http://localhost:8080/api/auth/student/profile",
-          "protocol": "http",
-          "host": [
-            "localhost"
-          ],
-          "port": "8080",
-          "path": [
-            "api",
-            "auth",
-            "student",
-            "profile"
-          ]
+        {
+          "name": "Get by student ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments/student/32",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments",
+                "student",
+                "32"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All enrollments",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by course ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments/course/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments",
+                "course",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments/2/status?status=DROPPED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments",
+                "2",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "DROPPED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Enrollment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/enrollments/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "enrollments",
+                "1"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
+    },
+    {
+      "name": "Attendance",
+      "item": [
+        {
+          "name": "Mark attendance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"studentId\": 32,\r\n  \"courseId\": 2,\r\n  \"classDate\": \"2026-04-13\",\r\n  \"status\": \"PRESENT\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/attendance",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "attendance"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all Attendance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/attendance",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "attendance"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Attendance",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"studentId\": 32,\r\n  \"courseId\": 2,\r\n  \"classDate\": \"2026-04-13\",\r\n  \"status\": \"ABSENT\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/attendance/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "attendance",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by student ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/attendance/student/32 ",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "attendance",
+                "student",
+                "32 "
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get by Course ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/attendance/course/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "attendance",
+                "course",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Marks",
+      "item": [
+        {
+          "name": "Create Marks",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"studentId\": 33,\r\n  \"subjectId\": 1,\r\n  \"courseId\": 1,\r\n  \"theoryMarks\": -40,\r\n  \"practicalMarks\": 50,\r\n  \"semester\": 3,\r\n  \"academicYear\": \"2024-25\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/marks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Marks",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/marks",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Marks By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/marks/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Marks By Student ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/marks/student/32",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks",
+                "student",
+                "32"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Marks By Course ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/marks/course/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks",
+                "course",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTExMUBnbWFpbC5jb20iLCJyb2xlIjoiRkFDVUxUWSIsInVzZXJJZCI6MTcsImlhdCI6MTc3NjA3NzMzNiwiZXhwIjoxNzc2MTEzMzM2fQ.gclcgfSvsyYwiKLcif_Ndetm5uNM202e5M9LFkcDnIY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"studentId\": 33,\r\n  \"subjectId\": 1,\r\n  \"courseId\": 1,\r\n  \"theoryMarks\": 40,\r\n  \"practicalMarks\": 50,\r\n  \"semester\": 3,\r\n  \"academicYear\": \"2024-25\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/marks/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/marks/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "marks",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fee Structure",
+      "item": [
+        {
+          "name": "Create Fee Structure",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"branch\": \"CSE\",\r\n  \"semester\": 3,\r\n  \"tuitionFee\": 50000,\r\n  \"hostelFee\": 20000,\r\n  \"libraryFee\": 3000,\r\n  \"labFee\": 5000,\r\n  \"dueDate\": \"2026-05-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/fee-structures",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-structures"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-structures",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-structures"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-structures/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-structures",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Branch and Semester",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/fee-structures/filter?branch=CSE&semester=3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-structures",
+                "filter"
+              ],
+              "query": [
+                {
+                  "key": "branch",
+                  "value": "CSE"
+                },
+                {
+                  "key": "semester",
+                  "value": "3"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"branch\": \"CSE\",\r\n  \"semester\": 3,\r\n  \"tuitionFee\": 50000,\r\n  \"hostelFee\": 20000,\r\n  \"libraryFee\": 3000,\r\n  \"labFee\": 500,\r\n  \"dueDate\": \"2026-05-01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/fee-structures/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-structures",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-structures/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-structures",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Fee Payment",
+      "item": [
+        {
+          "name": "Create Fee Payment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzYW5hMTAxQGdtYWlsLmNvbSIsInJvbGUiOiJTVFVERU5UIiwidXNlcklkIjo0MCwiaWF0IjoxNzc2MDgxNDU0LCJleHAiOjE3NzYxMTc0NTR9.ioZxw22sELT43CiE0_2AaiS-Jd9gNjjDeWPFWhA_Qn4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"feeStructureId\": 2,\r\n  \"amountPaid\": 50000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Student ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments/student/40",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments",
+                "student",
+                "40"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments/status?status=COMPLETED",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments",
+                "status"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "COMPLETED"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/fee-payments/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "fee-payments",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Announcement",
+      "item": [
+        {
+          "name": "create announcement",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/announcements",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/announcements",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By Active",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/announcements/active",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements",
+                "active"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/announcements/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Filter By Target",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/announcements/target?target=STUDENT",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements",
+                "target"
+              ],
+              "query": [
+                {
+                  "key": "target",
+                  "value": "STUDENT"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"title\": \"Holiday Notice on sankranthi\",\r\n  \"description\": \"College closed tomorrow\",\r\n  \"targetAudience\": \"STUDENT\",\r\n  \"expiresAt\": \"2026-04-20\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/announcements/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbnJpeWFAZ21haWwuY29tIiwicm9sZSI6IkFETUlOIiwidXNlcklkIjozLCJpYXQiOjE3NzYwNjk4MTEsImV4cCI6MTc3NjEwNTgxMX0._NDxVUPpQs3hYYc5gCPXFmY2MPfXsPAAZ0dSKNL5X1w",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/announcements/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "announcements",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
