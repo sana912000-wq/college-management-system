@@ -94,7 +94,7 @@ Complete Authentication System
 
 🔮 Future Improvements
 •	Unit Testing (JUnit)
-•	Frontend Integration (Angular/React)
+•	Frontend Integration continuation (Angular/React)
 •	Docker Deployment
 •	CI/CD Pipeline
 •	Extending Email Notification Enhancements
