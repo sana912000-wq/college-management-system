@@ -5,7 +5,31 @@ This is a full-fledged College Management System Backend developed using Spring 
 The system supports Student, Faculty, and Admin roles with complete functionality including authentication, course management, attendance tracking, fee management, and more.
 
 🔗 **Deployed Backend URL**
-https://college-management-system-production-d3e2.up.railway.app
+API Base URL:  https://college-management-system-1-14of.onrender.com
+
+This is a Spring Boot REST API deployed on Render. Use Postman to test the endpoints.
+for testing or example :
+student register API :POST /api/auth/student/register
+FULL URL : https://college-management-system-1-14of.onrender.com/api/auth/student/register
+Request Body:
+{
+"name": "sana",
+"email": "sana101@gmail.com",
+"phone": "7981455400",
+"password": "Zananas@1209",
+"branch": "ECE",
+"enrollmentYear": 2019
+}
+
+Student Login API : POST /api/auth/student/login
+FULL URL : https://college-management-system-1-14of.onrender.com/api/auth/student/login
+Request Body:
+{
+"email": "sana1011@gmail.com",
+"password": "Zananas@1209"
+}
+
+After login you will get JWT token in response, use that token to access protected APIs by adding it in Authorization header as Bearer token.
 
 📁 **Postman Collection:**
 College Management System.postman_collection.json
