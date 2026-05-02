@@ -1,20 +1,19 @@
-swagger url : http://localhost:8080/swagger-ui/index.html
+🎓 **College Management System (LMS Backend)**
 
-🎓 College Management System (LMS Backend)
-
-🚀 Project Overview
-
+🚀 **Project Overview**
 This is a full-fledged College Management System Backend developed using Spring Boot.
 The system supports Student, Faculty, and Admin roles with complete functionality including authentication, course management, attendance tracking, fee management, and more.
 
-🔗 Deployed Backend URL:
+🔗 **Deployed Backend URL**
+https://college-management-system-production-d3e2.up.railway.app
 
-📁 Postman Collection:
+📁 **Postman Collection:**
 College Management System.postman_collection.json
 
-swagger url : http://localhost:8080/swagger-ui/index.html
+**swagger url**
+http://localhost:8080/swagger-ui/index.html
 
-🔐 Authentication & Security
+**🔐 Authentication & Security**
 •	JWT-based Authentication
 •	Role-Based Access Control (RBAC)
 •	Roles:
@@ -26,7 +25,7 @@ swagger url : http://localhost:8080/swagger-ui/index.html
 •	Reset Password
 •	Change Password
 
-🧩 Modules Implemented
+**🧩 Modules Implemented**
 👨‍🎓 Student Module
 •	Student Registration & Login
 •	Profile Management
@@ -69,14 +68,14 @@ swagger url : http://localhost:8080/swagger-ui/index.html
 •	Create Announcements
 •	Target Audience (Student / Faculty / All)
 
-🏗️ Project Structure
+**🏗️ Project Structure**
 •	Controller Layer (REST APIs)
 •	Service Layer (Business Logic)
 •	Repository Layer (JPA)
 •	DTO Layer (Data Transfer Objects)
 •	Entity Layer (Database Models)
 
-🛠️ Tech Stack
+**🛠️ Tech Stack**
 •	Java 17+
 •	Spring Boot 3+
 •	Spring Security
@@ -86,13 +85,13 @@ swagger url : http://localhost:8080/swagger-ui/index.html
 •	Swagger (OpenAPI)
 •	Maven
 
-Complete Authentication System
+**Complete Authentication System**
 •	Multi-role Support (Student, Faculty, Admin)
 •	Secure APIs with JWT
 •	Full CRUD Operations for all modules
 •	Clean layered architecture
 
-🔮 Future Improvements
+**🔮 Future Improvements**
 •	Unit Testing (JUnit)
 •	Frontend Integration continuation (Angular/React)
 •	Docker Deployment
