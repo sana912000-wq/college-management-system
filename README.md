@@ -35,7 +35,7 @@ After login you will get JWT token in response, use that token to access protect
 College Management System.postman_collection.json
 
 **swagger url**
-http://localhost:8080/swagger-ui/index.html
+https://college-management-system-1-14of.onrender.com/swagger-ui/index.html
 
 **🔐 Authentication & Security**
 •	JWT-based Authentication
